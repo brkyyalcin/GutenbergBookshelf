@@ -44,6 +44,30 @@ namespace GutenbergBookshelf.Controllers
         }
 
 
+
+        // GET api/<BooksController>/user/5
+        [HttpGet("user/{id}")]
+        public async Task<ActionResult<Book>> GetBooksByUserId(int id)
+        {
+            var books = await _context.Books.Where(w => w.UserId == id).ToListAsync();
+
+            if (books == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(books);
+        }
+
+
+
+
+
+
+
+
+
+
         // POST api/<BooksController>
         [HttpPost]
         public async Task<ActionResult<Book>> PostBooks(Book book)
